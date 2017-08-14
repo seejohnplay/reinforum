@@ -6,7 +6,7 @@ class forumAPI {
       return response.json()
     }).catch(error => {
       return error
-    });
+    })
   }
 }
 

@@ -7,8 +7,8 @@ export function loadCategories() {
       dispatch(loadCategoriesSuccess(payload))
     }).catch(error => {
       throw(error)
-    });
-  };
+    })
+  }
 }
 
 export function loadCategoriesSuccess(payload) {
