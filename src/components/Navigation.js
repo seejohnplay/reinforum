@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { loadCategories, loadPosts } from '../actions'
+import { loadCategories } from '../actions'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
 
 class Navigation extends React.Component {
@@ -16,7 +16,6 @@ class Navigation extends React.Component {
 
   componentDidMount() {
     this.props.loadCategories()
-    this.props.loadPosts()
   }
 
   toggle() {
@@ -47,15 +46,13 @@ class Navigation extends React.Component {
 
 function mapStateToProps ({ categories, posts }) {
   return {
-    categories: categories,
-    posts: posts
+    categories: categories
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    loadCategories: () => dispatch(loadCategories()),
-    loadPosts: () => dispatch(loadPosts())
+    loadCategories: () => dispatch(loadCategories())
   }
 }
 

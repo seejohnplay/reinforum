@@ -10,7 +10,6 @@ import thunk from 'redux-thunk'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
