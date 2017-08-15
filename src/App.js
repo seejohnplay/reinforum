@@ -9,7 +9,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <Route path="/category/:name" component={Category} />
+        <Route path="/:name?" component={Category} />
       </div>
     )
   }

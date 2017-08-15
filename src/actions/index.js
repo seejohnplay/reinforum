@@ -14,3 +14,17 @@ export function loadCategories() {
 export function loadCategoriesSuccess(payload) {
   return {type: types.LOAD_CATEGORIES_SUCCESS, categories: payload.categories}
 }
+
+export function loadPosts() {
+  return function(dispatch) {
+    return forumAPI.getAllPosts().then(payload => {
+      dispatch(loadPostsSuccess(payload))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function loadPostsSuccess(payload) {
+  return {type: types.LOAD_POSTS_SUCCESS, posts: payload}
+}

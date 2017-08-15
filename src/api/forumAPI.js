@@ -8,6 +8,16 @@ class forumAPI {
       return error
     })
   }
+
+  static getAllPosts() {
+    return fetch('http://localhost:5001/posts',
+      { headers: { 'Authorization': 'whatever-you-want' }})
+    .then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
 }
 
 export default forumAPI

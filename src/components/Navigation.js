@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Route, Link } from 'react-router-dom'
-import { loadCategories } from '../actions'
+import { Link } from 'react-router-dom'
+import { loadCategories, loadPosts } from '../actions'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
 
 class Navigation extends React.Component {
@@ -16,6 +16,7 @@ class Navigation extends React.Component {
 
   componentDidMount() {
     this.props.loadCategories()
+    this.props.loadPosts()
   }
 
   toggle() {
@@ -34,7 +35,7 @@ class Navigation extends React.Component {
             <Nav className="ml-auto" navbar>
               {this.props.categories.map(category => (
                 <NavItem key={category.name}>
-                  <NavLink tag={Link} to={"/category/" + category.name}>{category.name}</NavLink>
+                  <NavLink tag={Link} to={"/" + category.name}>{category.name}</NavLink>
                 </NavItem>))}
             </Nav>
           </Collapse>
@@ -44,15 +45,17 @@ class Navigation extends React.Component {
   }
 }
 
-function mapStateToProps ({ categories }) {
+function mapStateToProps ({ categories, posts }) {
   return {
-    categories: categories
+    categories: categories,
+    posts: posts
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    loadCategories: () => dispatch(loadCategories())
+    loadCategories: () => dispatch(loadCategories()),
+    loadPosts: () => dispatch(loadPosts())
   }
 }
 
