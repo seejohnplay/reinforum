@@ -4,7 +4,7 @@ import './App.css'
 import Navigation from './components/Navigation'
 import PostList from './components/PostList'
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
@@ -14,5 +14,3 @@ class App extends Component {
     )
   }
 }
-
-export default App

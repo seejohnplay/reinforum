@@ -15,9 +15,9 @@ export function loadCategoriesSuccess(payload) {
   return {type: types.LOAD_CATEGORIES_SUCCESS, categories: payload.categories}
 }
 
-export function loadPosts() {
+export function loadPosts(category) {
   return function(dispatch) {
-    return forumAPI.getAllPosts().then(payload => {
+    return forumAPI.getAllPosts(category).then(payload => {
       dispatch(loadPostsSuccess(payload))
     }).catch(error => {
       throw(error)

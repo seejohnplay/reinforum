@@ -16,21 +16,22 @@ class Post extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadPosts()
+    this.props.loadPosts(this.props.match.params.category)
   }
 
-  filterPosts = (posts, filter) => {
-    return posts.filter(post => filter ? post.category === filter : post)
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.category !== prevProps.match.params.category) {
+      this.props.loadPosts(this.props.match.params.category)
+    }
   }
 
   render() {
     const { cardColor } = this.state
-    const { posts } = this.props
 
     return (
       <div>
         <CardDeck>
-          {this.filterPosts(posts, this.props.match.params.category).map(post => (
+          {this.props.posts.map(post => (
             <Card block inverse color={cardColor[post.category]} key={post.id}>
               <CardTitle>
                 <button onClick={() => this.props.vote(post.id, "upVote")}
@@ -53,7 +54,7 @@ class Post extends React.Component {
   }
 }
 
-function mapStateToProps ({ posts }) {
+function mapStateToProps ({ posts }, { params }) {
   return {
     posts: posts
   }
@@ -61,7 +62,7 @@ function mapStateToProps ({ posts }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    loadPosts: () => dispatch(loadPosts()),
+    loadPosts: (category) => dispatch(loadPosts(category)),
     vote: (post_id, option) => dispatch(vote(post_id, option))
   }
 }

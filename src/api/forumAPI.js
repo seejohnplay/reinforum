@@ -9,8 +9,9 @@ class forumAPI {
     })
   }
 
-  static getAllPosts() {
-    return fetch('http://localhost:5001/posts',
+  static getAllPosts(category) {
+    const url = category ? `/${category}/posts` : '/posts'
+    return fetch('http://localhost:5001' + url,
       { headers: { 'Authorization': 'whatever-you-want' }})
     .then(response => {
       return response.json()
