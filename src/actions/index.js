@@ -15,6 +15,22 @@ export function loadCategoriesSuccess(payload) {
   return {type: types.LOAD_CATEGORIES_SUCCESS, categories: payload.categories}
 }
 
+// Posts
+
+export function addPost(post) {
+  return function(dispatch) {
+    return forumAPI.addPost(post).then(payload => {
+      dispatch(addPostSuccess(payload))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function addPostSuccess(payload) {
+  return {type: types.ADD_POST_SUCCESS, post: payload}
+}
+
 export function loadPosts(category) {
   return function(dispatch) {
     return forumAPI.getAllPosts(category).then(payload => {
@@ -32,7 +48,7 @@ export function loadPostsSuccess(payload) {
 export function vote(post_id, option) {
   return function(dispatch) {
     return forumAPI.vote(post_id, option).then(payload => {
-      dispatch(voteSuccess(payload));
+      dispatch(voteSuccess(payload))
     }).catch(error => {
       throw(error)
     })

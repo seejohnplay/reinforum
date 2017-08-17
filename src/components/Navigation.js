@@ -34,8 +34,11 @@ class Navigation extends React.Component {
             <Nav className="ml-auto" navbar>
               {this.props.categories.map(category => (
                 <NavItem key={category.name}>
-                  <NavLink tag={Link} to={"/" + category.name}>{category.name}</NavLink>
+                  <NavLink className={category.name} tag={Link} to={"/" + category.name}>{category.name}</NavLink>
                 </NavItem>))}
+                <NavItem key="add">
+                  <NavLink className="new-post" tag={Link} to="/new_post">New Post</NavLink>
+                </NavItem>
             </Nav>
           </Collapse>
         </Navbar>

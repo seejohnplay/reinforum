@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { loadPosts, vote } from '../actions'
-import { Card, Button, CardTitle, CardText, CardDeck } from 'reactstrap'
+import { addPost, loadPosts, vote } from '../actions'
+import { Card, Button, CardTitle, CardText, CardColumns } from 'reactstrap'
 import ArrowUpIcon from 'react-icons/lib/fa/arrow-up'
 import ArrowDownIcon from 'react-icons/lib/fa/arrow-down'
 
-class Post extends React.Component {
+class PostList extends React.Component {
   // TODO: Move this out of state and into CSS classes
   state = {
     cardColor: {
@@ -30,7 +30,7 @@ class Post extends React.Component {
 
     return (
       <div>
-        <CardDeck>
+        <CardColumns>
           {this.props.posts.map(post => (
             <Card block inverse color={cardColor[post.category]} key={post.id}>
               <CardTitle>
@@ -48,13 +48,13 @@ class Post extends React.Component {
               <CardText>{post.body} - {post.author}</CardText>
               <Button>Read comments</Button>
           </Card>))}
-        </CardDeck>
+        </CardColumns>
       </div>
     )
   }
 }
 
-function mapStateToProps ({ posts }, { params }) {
+function mapStateToProps ({ posts }) {
   return {
     posts: posts
   }
@@ -62,6 +62,7 @@ function mapStateToProps ({ posts }, { params }) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    addPost: (post) => dispatch(addPost(post)),
     loadPosts: (category) => dispatch(loadPosts(category)),
     vote: (post_id, option) => dispatch(vote(post_id, option))
   }
@@ -70,4 +71,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Post)
+)(PostList)

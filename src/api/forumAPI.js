@@ -9,6 +9,25 @@ class forumAPI {
     })
   }
 
+// Posts
+
+  static addPost(post) {
+    return fetch('http://localhost:5001/posts',
+      {
+        headers: {
+          'Authorization': 'whatever-you-want',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(post)
+      })
+    .then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
   static getAllPosts(category) {
     const url = category ? `/${category}/posts` : '/posts'
     return fetch('http://localhost:5001' + url,
