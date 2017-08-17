@@ -45,6 +45,20 @@ export function deletePostSuccess(postId) {
   return {type: types.DELETE_POST_SUCCESS, postId: postId}
 }
 
+export function editPost(post) {
+  return function(dispatch) {
+    return forumAPI.editPost(post).then(payload => {
+      dispatch(editPostSuccess(payload))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function editPostSuccess(payload) {
+  return {type: types.EDIT_POST_SUCCESS, post: payload}
+}
+
 export function loadPosts(category) {
   return function(dispatch) {
     return forumAPI.getAllPosts(category).then(payload => {

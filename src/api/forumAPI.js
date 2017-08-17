@@ -54,6 +54,23 @@ class forumAPI {
     })
   }
 
+  static editPost(post) {
+    return fetch(`http://localhost:5001/posts/${post.id}`,
+      {
+        headers: {
+          'Authorization': 'whatever-you-want',
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(post)
+      })
+    .then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
   static vote(post_id, option) {
     return fetch(`http://localhost:5001/posts/${post_id}`,
       {

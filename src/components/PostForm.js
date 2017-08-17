@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 class PostForm extends Component {
+  componentDidMount() {
+    this.props.initialize(this.props.postToEdit)
+  }
+
   render() {
     const { handleSubmit } = this.props
 
@@ -37,4 +41,6 @@ class PostForm extends Component {
   }
 }
 
-export default reduxForm({ form: 'postForm'})(PostForm)
+export default reduxForm({
+  form: 'postForm'
+})(PostForm)

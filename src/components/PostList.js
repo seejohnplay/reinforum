@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { addPost, deletePost, loadPosts, vote } from '../actions'
 import { Card, Button, CardTitle, CardText, CardColumns } from 'reactstrap'
 import ArrowUpIcon from 'react-icons/lib/fa/arrow-up'
@@ -47,6 +48,7 @@ class PostList extends React.Component {
               </CardTitle>
               <CardText>{post.body} - {post.author}</CardText>
               <Button>Read comments</Button>
+              <Button tag={Link} to={"/edit_post/"+post.id}>Edit</Button>
               <Button color="danger" onClick={() => this.props.deletePost(post.id)}>Delete</Button>
           </Card>))}
         </CardColumns>

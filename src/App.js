@@ -11,6 +11,7 @@ export default class App extends Component {
       <div className="App">
         <Navigation />
         <Route path="/new_post" component={PostEditor} />
+        <Route path="/edit_post/:postId" component={PostEditor} />
         <Route path="/:category?" component={PostList} />
       </div>
     )

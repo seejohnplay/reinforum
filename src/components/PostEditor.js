@@ -6,8 +6,13 @@ import PostForm from './PostForm'
 import { addPost } from '../actions'
 
 class PostEditor extends React.Component {
+  componentWillMount() {
+    this.postToEdit = this.props.posts.find(post => post.id === this.props.match.params.postId)
+    console.log(this.postToEdit)
+  }
+
   submit = (post) => {
-    post.id = uuid.v4()
+    post.id = post.id || uuid.v4()
     post.timestamp = Date.now()
 
     this.props.addPost(post)
@@ -17,7 +22,10 @@ class PostEditor extends React.Component {
   render() {
     return (
       <div>
-        <PostForm categories={this.props.categories} onSubmit={this.submit} />
+        <PostForm
+          categories={this.props.categories}
+          postToEdit={this.postToEdit}
+          onSubmit={this.submit} />
       </div>
     )
   }
@@ -25,7 +33,8 @@ class PostEditor extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    categories: state.categories
+    categories: state.categories,
+    posts: state.posts
   }
 }
 
