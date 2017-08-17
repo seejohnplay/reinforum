@@ -6,10 +6,6 @@ import PostForm from './PostForm'
 import { addPost } from '../actions'
 
 class PostEditor extends React.Component {
-  constructor() {
-    super()
-  }
-
   submit = (post) => {
     post.id = uuid.v4()
     post.timestamp = Date.now()

@@ -18,7 +18,7 @@ class forumAPI {
           'Authorization': 'whatever-you-want',
           'Content-Type': 'application/json'
         },
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(post)
       })
     .then(response => {
@@ -34,6 +34,21 @@ class forumAPI {
       { headers: { 'Authorization': 'whatever-you-want' }})
     .then(response => {
       return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
+  static deletePostById(postId) {
+    return fetch(`http://localhost:5001/posts/${postId}`,
+      {
+        headers: {
+          'Authorization': 'whatever-you-want',
+        },
+        method: 'DELETE',
+      })
+    .then(response => {
+      return response
     }).catch(error => {
       return error
     })

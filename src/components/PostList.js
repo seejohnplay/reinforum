@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addPost, loadPosts, vote } from '../actions'
+import { addPost, deletePost, loadPosts, vote } from '../actions'
 import { Card, Button, CardTitle, CardText, CardColumns } from 'reactstrap'
 import ArrowUpIcon from 'react-icons/lib/fa/arrow-up'
 import ArrowDownIcon from 'react-icons/lib/fa/arrow-down'
@@ -47,6 +47,7 @@ class PostList extends React.Component {
               </CardTitle>
               <CardText>{post.body} - {post.author}</CardText>
               <Button>Read comments</Button>
+              <Button color="danger" onClick={() => this.props.deletePost(post.id)}>Delete</Button>
           </Card>))}
         </CardColumns>
       </div>
@@ -63,6 +64,7 @@ function mapStateToProps ({ posts }) {
 function mapDispatchToProps (dispatch) {
   return {
     addPost: (post) => dispatch(addPost(post)),
+    deletePost: (postId) => dispatch(deletePost(postId)),
     loadPosts: (category) => dispatch(loadPosts(category)),
     vote: (post_id, option) => dispatch(vote(post_id, option))
   }
