@@ -86,3 +86,13 @@ export function vote(post_id, option) {
 export function voteSuccess(payload) {
   return {type: types.VOTE_SUCCESS, post: payload}
 }
+
+export function updateSortKey(sortKey) {
+  return function(dispatch) {
+    return dispatch(updateSortKeySuccess(sortKey))
+  }
+}
+
+export function updateSortKeySuccess(payload) {
+  return {type: types.UPDATE_SORT_KEY_SUCCESS, sortKey: payload}
+}

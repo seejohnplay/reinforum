@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { addPost, deletePost, loadPosts, vote } from '../actions'
-import { Card, Button, CardTitle, CardText, CardColumns } from 'reactstrap'
+import TimeAgo from 'react-timeago'
+import { addPost, deletePost, loadPosts, updateSortKey, vote } from '../actions'
+import { Button, ButtonGroup, Card, CardTitle, CardText, CardColumns } from 'reactstrap'
 import ArrowUpIcon from 'react-icons/lib/fa/arrow-up'
 import ArrowDownIcon from 'react-icons/lib/fa/arrow-down'
 
@@ -26,13 +27,36 @@ class PostList extends React.Component {
     }
   }
 
+  sortBy(posts, prop) {
+    return posts.sort((a,b) => b[prop] - a[prop])
+  }
+
   render() {
     const { cardColor } = this.state
 
     return (
       <div>
+        <Card block>
+          <CardTitle>
+          <span style={{marginRight: "10px"}}>Sort by:</span>
+            <ButtonGroup>
+              <Button
+                className={this.props.sortKey === "voteScore" && "active"}
+                style={{cursor: "pointer"}}
+                onClick={() => this.props.updateSortKey("voteScore")}>
+                  Popularity
+              </Button>
+              <Button
+                className={this.props.sortKey === "timestamp" && "active"}
+                style={{cursor: "pointer"}}
+                onClick={() => this.props.updateSortKey("timestamp")}>
+                  Timestamp
+              </Button>
+            </ButtonGroup>
+          </CardTitle>
+        </Card>
         <CardColumns>
-          {this.props.posts.map(post => (
+          {this.sortBy(this.props.posts, this.props.sortKey).map(post => (
             <Card block inverse color={cardColor[post.category]} key={post.id}>
               <CardTitle>
                 <button onClick={() => this.props.vote(post.id, "upVote")}
@@ -44,12 +68,14 @@ class PostList extends React.Component {
                   style={{backgroundColor: "transparent", border: "none"}}>
                     <ArrowDownIcon />
                 </button>
-                {post.title} <small>{post.category}</small>
+                {post.title} <small><Link to={"/" + post.category}>{post.category}</Link></small>
               </CardTitle>
-              <CardText>{post.body} - {post.author}</CardText>
-              <Button>Read comments</Button>
+              <CardText>
+                {post.body} - {post.author} (<TimeAgo date={post.timestamp} live={false} />)
+              </CardText>
+              <Button style={{cursor: "pointer"}}>Read comments</Button>
               <Button tag={Link} to={"/edit_post/"+post.id}>Edit</Button>
-              <Button color="danger" onClick={() => this.props.deletePost(post.id)}>Delete</Button>
+              <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deletePost(post.id)}>Delete</Button>
           </Card>))}
         </CardColumns>
       </div>
@@ -57,9 +83,10 @@ class PostList extends React.Component {
   }
 }
 
-function mapStateToProps ({ posts }) {
+function mapStateToProps ({ posts, sortKey }) {
   return {
-    posts: posts
+    posts: posts,
+    sortKey: sortKey
   }
 }
 
@@ -68,6 +95,7 @@ function mapDispatchToProps (dispatch) {
     addPost: (post) => dispatch(addPost(post)),
     deletePost: (postId) => dispatch(deletePost(postId)),
     loadPosts: (category) => dispatch(loadPosts(category)),
+    updateSortKey: (sortKey) => dispatch(updateSortKey(sortKey)),
     vote: (post_id, option) => dispatch(vote(post_id, option))
   }
 }

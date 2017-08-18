@@ -1,4 +1,5 @@
 export default {
   categories: [],
-  posts: []
+  posts: [],
+  sortKey: 'voteScore'
 }
