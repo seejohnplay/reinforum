@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import './App.css'
 import Navigation from './components/Navigation'
 import PostEditor from './components/PostEditor'
@@ -10,9 +10,11 @@ export default class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <Route path="/new_post" component={PostEditor} />
-        <Route path="/edit_post/:postId" component={PostEditor} />
-        <Route path="/:category?" component={PostList} />
+        <Switch>
+          <Route path="/new_post" component={PostEditor} />
+          <Route path="/edit_post/:postId" component={PostEditor} />
+          <Route path="/:category?" component={PostList} />
+        </Switch>
       </div>
     )
   }

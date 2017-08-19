@@ -11,7 +11,7 @@ class PostForm extends Component {
 
     return (
       <div className="col col-md-6 offset-md-3" id="post-form">
-        <h2>New Post</h2>
+        <h2>{this.props.postToEdit ? 'Edit' : 'New'} Post</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
           <label>Title</label>

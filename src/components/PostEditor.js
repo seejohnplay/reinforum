@@ -8,7 +8,6 @@ import { addPost } from '../actions'
 class PostEditor extends React.Component {
   componentWillMount() {
     this.postToEdit = this.props.posts.find(post => post.id === this.props.match.params.postId)
-    console.log(this.postToEdit)
   }
 
   submit = (post) => {

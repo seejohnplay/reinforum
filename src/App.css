@@ -3,14 +3,26 @@
   background-color: #5BC0DE;
 }
 
+.react-card {
+  background-color: rgba(91, 192, 222, 0.7) !important;
+}
+
 .redux {
   color: #fff !important;
   background-color: #F0AD4E;
 }
 
+.redux-card {
+  background-color: rgba(240, 173, 78, 0.7) !important;
+}
+
 .udacity {
   color: #fff !important;
   background-color: #D9534F;
+}
+
+.udacity-card {
+  background-color: rgba(217, 83, 79, 0.7) !important;
 }
 
 .nav-link {
