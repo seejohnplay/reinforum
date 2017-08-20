@@ -73,6 +73,20 @@ export function loadPostsSuccess(payload) {
   return {type: types.LOAD_POSTS_SUCCESS, posts: payload}
 }
 
+export function loadComments(postId) {
+  return function(dispatch) {
+    return forumAPI.getcommentsByPostId(postId).then(payload => {
+      dispatch(loadCommentsSuccess(postId, payload))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function loadCommentsSuccess(postId, payload) {
+  return {type: types.LOAD_COMMENTS_SUCCESS, postId: postId, comments: payload}
+}
+
 export function vote(post_id, option) {
   return function(dispatch) {
     return forumAPI.vote(post_id, option).then(payload => {

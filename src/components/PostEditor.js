@@ -15,7 +15,7 @@ class PostEditor extends React.Component {
     post.timestamp = Date.now()
 
     this.postToEdit ? this.props.editPost(post) : this.props.addPost(post)
-    this.props.history.push('/')
+    this.props.history.goBack()
   }
 
   render() {
