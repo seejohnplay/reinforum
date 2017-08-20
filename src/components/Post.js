@@ -26,7 +26,7 @@ class Post extends React.Component {
         <CardText>
           {post.body} - {post.author} (<TimeAgo date={post.timestamp} live={false} />)
         </CardText>
-        <Button style={{cursor: "pointer"}}>Read comments</Button>
+        <Button tag={Link} to={"/" + post.category + "/" + post.id}>Read comments</Button>
         <Button tag={Link} to={"/edit_post/"+post.id}>Edit</Button>
         <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deletePost(post.id)}>Delete</Button>
       </Card>

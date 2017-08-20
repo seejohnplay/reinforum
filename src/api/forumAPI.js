@@ -71,8 +71,8 @@ class forumAPI {
     })
   }
 
-  static vote(post_id, option) {
-    return fetch(`http://localhost:5001/posts/${post_id}`,
+  static vote(postId, option) {
+    return fetch(`http://localhost:5001/posts/${postId}`,
       {
         headers: {
           'Authorization': 'whatever-you-want',

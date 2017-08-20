@@ -13,7 +13,7 @@ export default function postReducer(state = initialState.posts, action) {
     case types.EDIT_POST_SUCCESS:
       return [
         ...state.filter(post => post.id !== action.post.id),
-        Object.assign({}, action.post)
+        action.post
       ]
     case types.LOAD_POSTS_SUCCESS:
       return action.posts.filter(post => !post.deleted)

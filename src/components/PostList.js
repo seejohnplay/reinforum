@@ -46,7 +46,7 @@ class PostList extends React.Component {
             <Post
               key={post.id}
               post={post}
-              deletepost={this.props.deletePost}
+              deletePost={this.props.deletePost}
               vote={this.props.vote}
             />
           ))}

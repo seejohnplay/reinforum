@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import uuid from 'uuid'
 import PostForm from './PostForm'
-import { addPost } from '../actions'
+import { addPost, editPost } from '../actions'
 
 class PostEditor extends React.Component {
   componentWillMount() {
@@ -14,7 +14,7 @@ class PostEditor extends React.Component {
     post.id = post.id || uuid.v4()
     post.timestamp = Date.now()
 
-    this.props.addPost(post)
+    this.postToEdit ? this.props.editPost(post) : this.props.addPost(post)
     this.props.history.push('/')
   }
 
@@ -39,7 +39,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    addPost: (post) => dispatch(addPost(post))
+    addPost: (post) => dispatch(addPost(post)),
+    editPost: (post) => dispatch(editPost(post))
   }
 }
 
