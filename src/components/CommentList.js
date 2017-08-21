@@ -12,7 +12,8 @@ class CommentList extends React.Component {
   }
 
   render() {
-    const { parentId } = this.props
+    const { comments, deleteComment, parentId,
+            sortKey, updateSortKey, voteComment } = this.props
 
     return (
       <div>
@@ -21,26 +22,26 @@ class CommentList extends React.Component {
           <span style={{marginRight: "10px"}}>Sort by:</span>
           <ButtonGroup>
             <Button
-              className={this.props.sortKey === "voteScore" ? "active" : ""}
+              className={sortKey === "voteScore" ? "active" : ""}
               style={{cursor: "pointer"}}
-              onClick={() => this.props.updateSortKey("voteScore")}>
+              onClick={() => updateSortKey("voteScore")}>
                 Popularity
             </Button>
             <Button
-              className={this.props.sortKey === "timestamp" ? "active" : ""}
+              className={sortKey === "timestamp" ? "active" : ""}
               style={{cursor: "pointer"}}
-              onClick={() => this.props.updateSortKey("timestamp")}>
+              onClick={() => updateSortKey("timestamp")}>
                 Timestamp
             </Button>
           </ButtonGroup>
         </CardTitle>
       </Card>
-      {this.props.comments.map(comment => (
+      {this.sortBy(comments, sortKey).map(comment => (
         <Comment
           key={comment.id}
           comment={comment}
-          deleteComment={this.props.deleteComment}
-          vote={this.props.voteComment} />
+          deleteComment={deleteComment}
+          vote={voteComment} />
       ))}
         <div>
           <Button tag={Link} to={"/posts/"+parentId+"/comments/new"}>New Comment</Button>
