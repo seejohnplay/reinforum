@@ -14,6 +14,7 @@ class PostDetails extends React.Component {
             post={this.props.post}
             deletePost={this.props.deletePost}
             vote={this.props.vote}
+            showComments={true}
           />
         ) : (
           <Redirect to="/" />

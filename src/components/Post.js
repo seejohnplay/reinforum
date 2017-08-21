@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { loadComments } from '../actions'
 import TimeAgo from 'react-timeago'
+import Comment from './Comment'
 import { Button, Card, CardTitle, CardText } from 'reactstrap'
 import ArrowUpIcon from 'react-icons/lib/fa/arrow-up'
 import ArrowDownIcon from 'react-icons/lib/fa/arrow-down'
@@ -12,12 +13,11 @@ class Post extends React.Component {
     this.props.loadComments(this.props.post.id)
   }
 
-  commentCount = () => (this.props.comments[this.props.post.id] || []).length
-
   render() {
-    const { post } = this.props
+    const { comments, post, showComments } = this.props
 
     return (
+      <div>
       <Card block className={post.category + "-card"}>
         <CardTitle>
           <button onClick={() => this.props.vote(post.id, "upVote")}
@@ -34,10 +34,21 @@ class Post extends React.Component {
         <CardText>
           {post.body} - {post.author} (<TimeAgo date={post.timestamp} live={false} />)
         </CardText>
-        <Button tag={Link} to={"/" + post.category + "/" + post.id}>Read { this.commentCount() } comments</Button>
-        <Button tag={Link} to={"/edit_post/"+post.id}>Edit</Button>
-        <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deletePost(post.id)}>Delete</Button>
+        {!showComments &&
+          <Button tag={Link} to={"/" + post.category + "/" + post.id}>{ (comments[post.id] || []).length } comments</Button>}
+        <div className="float-right">
+          <Button tag={Link} to={"/edit_post/"+post.id}>Edit</Button>
+          <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deletePost(post.id)}>Delete</Button>
+        </div>
       </Card>
+      {this.commentCount > 0 &&
+        <h4>Comments</h4>}
+      {showComments &&
+        this.props.comments[this.props.post.id].map(comment => (
+          <Comment comment={comment} />
+        )
+      )}
+      </div>
     )
   }
 }
