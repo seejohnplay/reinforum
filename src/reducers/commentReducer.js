@@ -11,6 +11,11 @@ export default function commentReducer(state = initialState.comments, action) {
         action.comment
       ]
       return nextState
+    case types.DELETE_COMMENT_SUCCESS:
+      nextState[action.parentId] = [
+        ...nextState[action.parentId].filter(comment => comment.id !== action.commentId)
+      ]
+      return nextState
     case types.EDIT_COMMENT_SUCCESS:
       nextState[action.comment.parentId] = [
         ...state[action.comment.parentId].filter(comment => comment.id !== action.comment.id),

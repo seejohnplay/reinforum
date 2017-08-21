@@ -106,6 +106,21 @@ class forumAPI {
     })
   }
 
+  static deleteCommentById(commentId) {
+    return fetch(`http://localhost:5001/comments/${commentId}`,
+      {
+        headers: {
+          'Authorization': 'whatever-you-want',
+        },
+        method: 'DELETE',
+      })
+    .then(response => {
+      return response
+    }).catch(error => {
+      return error
+    })
+  }
+
   static getcommentsByPostId(postId) {
     return fetch(`http://localhost:5001/posts/${postId}/comments`,
       { headers: { 'Authorization': 'whatever-you-want' }})

@@ -23,7 +23,7 @@ class Comment extends React.Component {
           </button>
           <span className="float-right">
             <Button tag={Link} to={"/posts/"+comment.parentId+"/comments/"+comment.id+"/edit"}>Edit</Button>
-            <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deletePost(comment.id)}>Delete</Button>
+            <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deleteComment(comment.parentId, comment.id)}>Delete</Button>
           </span>
           {comment.body} - {comment.author} (<TimeAgo date={comment.timestamp} live={false} />)
         </CardText>

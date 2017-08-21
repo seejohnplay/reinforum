@@ -113,6 +113,20 @@ export function addCommentSuccess(payload) {
   return {type: types.ADD_COMMENT_SUCCESS, comment: payload}
 }
 
+export function deleteComment(parentId, commentId) {
+  return function(dispatch) {
+    return forumAPI.deleteCommentById(commentId).then(() => {
+      dispatch(deleteCommentSuccess(parentId, commentId))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function deleteCommentSuccess(parentId, commentId) {
+  return {type: types.DELETE_COMMENT_SUCCESS, parentId: parentId, commentId: commentId}
+}
+
 export function editComment(comment) {
   return function(dispatch) {
     return forumAPI.editComment(comment).then(payload => {
