@@ -17,7 +17,7 @@ export default function postReducer(state = initialState.posts, action) {
       ]
     case types.LOAD_POSTS_SUCCESS:
       return action.posts.filter(post => !post.deleted)
-    case types.VOTE_SUCCESS:
+    case types.VOTE_POST_SUCCESS:
       return [
         ...state.map(post => post.id === action.post.id ? action.post : post)
       ]

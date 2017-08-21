@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addPost, deletePost, loadPosts, updateSortKey, vote } from '../actions'
+import { addPost, deletePost, loadPosts, updateSortKey, votePost } from '../actions'
 import { Button, ButtonGroup, Card, CardTitle, CardColumns } from 'reactstrap'
 import Post from './Post'
 
@@ -47,7 +47,7 @@ class PostList extends React.Component {
               key={post.id}
               post={post}
               deletePost={this.props.deletePost}
-              vote={this.props.vote}
+              vote={this.props.votePost}
             />
           ))}
         </CardColumns>
@@ -69,7 +69,7 @@ function mapDispatchToProps (dispatch) {
     deletePost: (postId) => dispatch(deletePost(postId)),
     loadPosts: (category) => dispatch(loadPosts(category)),
     updateSortKey: (sortKey) => dispatch(updateSortKey(sortKey)),
-    vote: (post_id, option) => dispatch(vote(post_id, option))
+    votePost: (post_id, option) => dispatch(votePost(post_id, option))
   }
 }
 

@@ -71,7 +71,7 @@ class forumAPI {
     })
   }
 
-  static vote(postId, option) {
+  static votePost(postId, option) {
     return fetch(`http://localhost:5001/posts/${postId}`,
       {
         headers: {
@@ -140,6 +140,23 @@ class forumAPI {
         },
         method: 'PUT',
         body: JSON.stringify(comment)
+      })
+    .then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
+  static voteComment(commentId, option) {
+    return fetch(`http://localhost:5001/comments/${commentId}`,
+      {
+        headers: {
+          'Authorization': 'whatever-you-want',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({option: option})
       })
     .then(response => {
       return response.json()

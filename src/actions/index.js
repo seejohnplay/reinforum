@@ -73,18 +73,18 @@ export function loadPostsSuccess(payload) {
   return {type: types.LOAD_POSTS_SUCCESS, posts: payload}
 }
 
-export function vote(post_id, option) {
+export function votePost(postId, option) {
   return function(dispatch) {
-    return forumAPI.vote(post_id, option).then(payload => {
-      dispatch(voteSuccess(payload))
+    return forumAPI.votePost(postId, option).then(payload => {
+      dispatch(votePostSuccess(payload))
     }).catch(error => {
       throw(error)
     })
   }
 }
 
-export function voteSuccess(payload) {
-  return {type: types.VOTE_SUCCESS, post: payload}
+export function votePostSuccess(payload) {
+  return {type: types.VOTE_POST_SUCCESS, post: payload}
 }
 
 export function updateSortKey(sortKey) {
@@ -153,4 +153,18 @@ export function loadComments(postId) {
 
 export function loadCommentsSuccess(postId, payload) {
   return {type: types.LOAD_COMMENTS_SUCCESS, postId: postId, comments: payload}
+}
+
+export function voteComment(commentId, option) {
+  return function(dispatch) {
+    return forumAPI.voteComment(commentId, option).then(payload => {
+      dispatch(voteCommentSuccess(payload))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function voteCommentSuccess(payload) {
+  return {type: types.VOTE_COMMENT_SUCCESS, comment: payload}
 }

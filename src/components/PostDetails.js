@@ -2,7 +2,7 @@ import React from 'react'
 import Post from './Post'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { deletePost, vote } from '../actions'
+import { deletePost, votePost } from '../actions'
 
 class PostDetails extends React.Component {
   render() {
@@ -13,7 +13,7 @@ class PostDetails extends React.Component {
             key={this.props.post.id}
             post={this.props.post}
             deletePost={this.props.deletePost}
-            vote={this.props.vote}
+            vote={this.props.votePost}
             showComments={true}
           />
         ) : (
@@ -33,7 +33,7 @@ function mapStateToProps ({ posts }, ownProps) {
 function mapDispatchToProps (dispatch) {
   return {
     deletePost: (postId) => dispatch(deletePost(postId)),
-    vote: (post_id, option) => dispatch(vote(post_id, option))
+    votePost: (post_id, option) => dispatch(votePost(post_id, option))
   }
 }
 

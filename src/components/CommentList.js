@@ -2,7 +2,7 @@ import React from 'react'
 import Comment from './Comment'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { deleteComment, updateSortKey, vote } from '../actions'
+import { deleteComment, updateSortKey, voteComment } from '../actions'
 import { Button, ButtonGroup, Card, CardTitle } from 'reactstrap'
 
 class CommentList extends React.Component {
@@ -39,7 +39,8 @@ class CommentList extends React.Component {
         <Comment
           key={comment.id}
           comment={comment}
-          deleteComment={this.props.deleteComment} />
+          deleteComment={this.props.deleteComment}
+          vote={this.props.voteComment} />
       ))}
         <div>
           <Button tag={Link} to={"/posts/"+parentId+"/comments/new"}>New Comment</Button>
@@ -59,7 +60,7 @@ function mapDispatchToProps (dispatch) {
   return {
     deleteComment: (parentId, commentId) => dispatch(deleteComment(parentId, commentId)),
     updateSortKey: (sortKey) => dispatch(updateSortKey(sortKey)),
-    vote: (post_id, option) => dispatch(vote(post_id, option))
+    voteComment: (post_id, option) => dispatch(voteComment(post_id, option))
   }
 }
 
