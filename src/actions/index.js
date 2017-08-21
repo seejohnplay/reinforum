@@ -73,20 +73,6 @@ export function loadPostsSuccess(payload) {
   return {type: types.LOAD_POSTS_SUCCESS, posts: payload}
 }
 
-export function loadComments(postId) {
-  return function(dispatch) {
-    return forumAPI.getcommentsByPostId(postId).then(payload => {
-      dispatch(loadCommentsSuccess(postId, payload))
-    }).catch(error => {
-      throw(error)
-    })
-  }
-}
-
-export function loadCommentsSuccess(postId, payload) {
-  return {type: types.LOAD_COMMENTS_SUCCESS, postId: postId, comments: payload}
-}
-
 export function vote(post_id, option) {
   return function(dispatch) {
     return forumAPI.vote(post_id, option).then(payload => {
@@ -109,4 +95,48 @@ export function updateSortKey(sortKey) {
 
 export function updateSortKeySuccess(payload) {
   return {type: types.UPDATE_SORT_KEY_SUCCESS, sortKey: payload}
+}
+
+// Comments
+
+export function addComment(comment) {
+  return function(dispatch) {
+    return forumAPI.addComment(comment).then(payload => {
+      dispatch(addCommentSuccess(payload))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function addCommentSuccess(payload) {
+  return {type: types.ADD_COMMENT_SUCCESS, comment: payload}
+}
+
+export function editComment(comment) {
+  return function(dispatch) {
+    return forumAPI.editComment(comment).then(payload => {
+      dispatch(editCommentSuccess(payload))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function editCommentSuccess(payload) {
+  return {type: types.EDIT_COMMENT_SUCCESS, comment: payload}
+}
+
+export function loadComments(postId) {
+  return function(dispatch) {
+    return forumAPI.getcommentsByPostId(postId).then(payload => {
+      dispatch(loadCommentsSuccess(postId, payload))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function loadCommentsSuccess(postId, payload) {
+  return {type: types.LOAD_COMMENTS_SUCCESS, postId: postId, comments: payload}
 }

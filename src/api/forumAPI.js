@@ -39,16 +39,6 @@ class forumAPI {
     })
   }
 
-  static getcommentsByPostId(postId) {
-    return fetch(`http://localhost:5001/posts/${postId}/comments`,
-      { headers: { 'Authorization': 'whatever-you-want' }})
-    .then(response => {
-      return response.json()
-    }).catch(error => {
-      return error
-    })
-  }
-
   static deletePostById(postId) {
     return fetch(`http://localhost:5001/posts/${postId}`,
       {
@@ -97,6 +87,52 @@ class forumAPI {
       return error
     })
   }
+
+// Comments
+  static addComment(comment) {
+    return fetch('http://localhost:5001/comments',
+      {
+        headers: {
+          'Authorization': 'whatever-you-want',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(comment)
+      })
+    .then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
+  static getcommentsByPostId(postId) {
+    return fetch(`http://localhost:5001/posts/${postId}/comments`,
+      { headers: { 'Authorization': 'whatever-you-want' }})
+    .then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
+  static editComment(comment) {
+    return fetch(`http://localhost:5001/comments/${comment.id}`,
+      {
+        headers: {
+          'Authorization': 'whatever-you-want',
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(comment)
+      })
+    .then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
 }
 
 export default forumAPI

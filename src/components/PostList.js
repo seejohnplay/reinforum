@@ -24,7 +24,7 @@ class PostList extends React.Component {
       <div>
         <Card block>
           <CardTitle>
-          <span style={{marginRight: "10px"}}>Sort by:</span>
+            <span style={{marginRight: "10px"}}>Sort by:</span>
             <ButtonGroup>
               <Button
                 className={this.props.sortKey === "voteScore" ? "active" : ""}

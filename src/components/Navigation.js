@@ -37,7 +37,7 @@ class Navigation extends React.Component {
                   <NavLink className={category.name} tag={Link} to={"/" + category.name}>{category.name}</NavLink>
                 </NavItem>))}
                 <NavItem key="add">
-                  <NavLink className="new-post" tag={Link} to="/new_post">New Post</NavLink>
+                  <NavLink className="new-post" tag={Link} to="/posts/new">New Post</NavLink>
                 </NavItem>
             </Nav>
           </Collapse>

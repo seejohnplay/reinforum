@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { loadComments } from '../actions'
 import TimeAgo from 'react-timeago'
-import Comment from './Comment'
+import CommentList from './CommentList'
 import { Button, Card, CardTitle, CardText } from 'reactstrap'
 import ArrowUpIcon from 'react-icons/lib/fa/arrow-up'
 import ArrowDownIcon from 'react-icons/lib/fa/arrow-down'
@@ -37,17 +37,15 @@ class Post extends React.Component {
         {!showComments &&
           <Button tag={Link} to={"/" + post.category + "/" + post.id}>{ (comments[post.id] || []).length } comments</Button>}
         <div className="float-right">
-          <Button tag={Link} to={"/edit_post/"+post.id}>Edit</Button>
+          <Button tag={Link} to={"/posts/"+post.id+"/edit"}>Edit</Button>
           <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deletePost(post.id)}>Delete</Button>
         </div>
       </Card>
       {this.commentCount > 0 &&
         <h4>Comments</h4>}
       {showComments &&
-        this.props.comments[this.props.post.id].map(comment => (
-          <Comment comment={comment} />
-        )
-      )}
+        <CommentList comments={comments[post.id]} parentId={post.id} />
+      }
       </div>
     )
   }

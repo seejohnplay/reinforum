@@ -21,10 +21,10 @@ class Comment extends React.Component {
             style={{backgroundColor: "transparent", border: "none"}}>
               <ArrowDownIcon />
           </button>
-          <div className="float-right">
-            <Button tag={Link} to={"/edit_comment/"+comment.id}>Edit</Button>
+          <span className="float-right">
+            <Button tag={Link} to={"/posts/"+comment.parentId+"/comments/"+comment.id+"/edit"}>Edit</Button>
             <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deletePost(comment.id)}>Delete</Button>
-          </div>
+          </span>
           {comment.body} - {comment.author} (<TimeAgo date={comment.timestamp} live={false} />)
         </CardText>
       </Card>
