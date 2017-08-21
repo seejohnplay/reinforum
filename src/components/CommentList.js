@@ -1,9 +1,10 @@
 import React from 'react'
-import Comment from './Comment'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { deleteComment, updateSortKey, voteComment } from '../actions'
-import { Button, ButtonGroup, Card, CardTitle } from 'reactstrap'
+import { Button } from 'reactstrap'
+import Comment from './Comment'
+import Sort from './Sort'
 
 class CommentList extends React.Component {
 
@@ -17,25 +18,7 @@ class CommentList extends React.Component {
 
     return (
       <div>
-      <Card block>
-        <CardTitle>
-          <span style={{marginRight: "10px"}}>Sort by:</span>
-          <ButtonGroup>
-            <Button
-              className={sortKey === "voteScore" ? "active" : ""}
-              style={{cursor: "pointer"}}
-              onClick={() => updateSortKey("voteScore")}>
-                Popularity
-            </Button>
-            <Button
-              className={sortKey === "timestamp" ? "active" : ""}
-              style={{cursor: "pointer"}}
-              onClick={() => updateSortKey("timestamp")}>
-                Timestamp
-            </Button>
-          </ButtonGroup>
-        </CardTitle>
-      </Card>
+      <Sort sortKey={sortKey} updateSortKey={updateSortKey} />
       {this.sortBy(comments, sortKey).map(comment => (
         <Comment
           key={comment.id}
@@ -61,7 +44,7 @@ function mapDispatchToProps (dispatch) {
   return {
     deleteComment: (parentId, commentId) => dispatch(deleteComment(parentId, commentId)),
     updateSortKey: (sortKey) => dispatch(updateSortKey(sortKey)),
-    voteComment: (post_id, option) => dispatch(voteComment(post_id, option))
+    voteComment: (postId, option) => dispatch(voteComment(postId, option))
   }
 }
 

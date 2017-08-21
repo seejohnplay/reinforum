@@ -6,14 +6,16 @@ import { deletePost, votePost } from '../actions'
 
 class PostDetails extends React.Component {
   render() {
+    const { deletePost, post, votePost } = this.props
+
     return (
       <div>
         {this.props.post ? (
           <Post
-            key={this.props.post.id}
-            post={this.props.post}
-            deletePost={this.props.deletePost}
-            vote={this.props.votePost}
+            key={post.id}
+            post={post}
+            deletePost={deletePost}
+            vote={votePost}
             showComments={true}
           />
         ) : (
@@ -33,7 +35,7 @@ function mapStateToProps ({ posts }, ownProps) {
 function mapDispatchToProps (dispatch) {
   return {
     deletePost: (postId) => dispatch(deletePost(postId)),
-    votePost: (post_id, option) => dispatch(votePost(post_id, option))
+    votePost: (postId, option) => dispatch(votePost(postId, option))
   }
 }
 

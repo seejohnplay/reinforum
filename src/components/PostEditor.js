@@ -19,10 +19,12 @@ class PostEditor extends React.Component {
   }
 
   render() {
+    const { categories } = this.props
+
     return (
       <div>
         <PostForm
-          categories={this.props.categories}
+          categories={categories}
           postToEdit={this.postToEdit}
           onSubmit={this.submit} />
       </div>

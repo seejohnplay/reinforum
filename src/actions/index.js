@@ -87,16 +87,6 @@ export function votePostSuccess(payload) {
   return {type: types.VOTE_POST_SUCCESS, post: payload}
 }
 
-export function updateSortKey(sortKey) {
-  return function(dispatch) {
-    return dispatch(updateSortKeySuccess(sortKey))
-  }
-}
-
-export function updateSortKeySuccess(payload) {
-  return {type: types.UPDATE_SORT_KEY_SUCCESS, sortKey: payload}
-}
-
 // Comments
 
 export function addComment(comment) {
@@ -167,4 +157,24 @@ export function voteComment(commentId, option) {
 
 export function voteCommentSuccess(payload) {
   return {type: types.VOTE_COMMENT_SUCCESS, comment: payload}
+}
+
+export function updateSortKey(sortKey) {
+  return function(dispatch) {
+    return dispatch(updateSortKeySuccess(sortKey))
+  }
+}
+
+export function updateSortKeySuccess(payload) {
+  return {type: types.UPDATE_SORT_KEY_SUCCESS, sortKey: payload}
+}
+
+export function toggleIsOpen() {
+  return function(dispatch) {
+    return dispatch(toggleIsOpenSuccess())
+  }
+}
+
+export function toggleIsOpenSuccess() {
+  return {type: types.TOGGLE_IS_OPEN_SUCCESS}
 }

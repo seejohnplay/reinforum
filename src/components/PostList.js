@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addPost, deletePost, loadPosts, updateSortKey, votePost } from '../actions'
-import { Button, ButtonGroup, Card, CardTitle, CardColumns } from 'reactstrap'
+import { CardColumns } from 'reactstrap'
 import Post from './Post'
+import Sort from './Sort'
 
 class PostList extends React.Component {
   componentDidMount() {
@@ -20,34 +21,18 @@ class PostList extends React.Component {
   }
 
   render() {
+    const { deletePost, posts, sortKey, updateSortKey, votePost } = this.props
+
     return (
       <div>
-        <Card block>
-          <CardTitle>
-            <span style={{marginRight: "10px"}}>Sort by:</span>
-            <ButtonGroup>
-              <Button
-                className={this.props.sortKey === "voteScore" ? "active" : ""}
-                style={{cursor: "pointer"}}
-                onClick={() => this.props.updateSortKey("voteScore")}>
-                  Popularity
-              </Button>
-              <Button
-                className={this.props.sortKey === "timestamp" ? "active" : ""}
-                style={{cursor: "pointer"}}
-                onClick={() => this.props.updateSortKey("timestamp")}>
-                  Timestamp
-              </Button>
-            </ButtonGroup>
-          </CardTitle>
-        </Card>
+        <Sort sortKey={sortKey} updateSortKey={updateSortKey} />
         <CardColumns>
-          {this.sortBy(this.props.posts, this.props.sortKey).map(post => (
+          {this.sortBy(posts, sortKey).map(post => (
             <Post
               key={post.id}
               post={post}
-              deletePost={this.props.deletePost}
-              vote={this.props.votePost}
+              deletePost={deletePost}
+              vote={votePost}
             />
           ))}
         </CardColumns>
@@ -69,7 +54,7 @@ function mapDispatchToProps (dispatch) {
     deletePost: (postId) => dispatch(deletePost(postId)),
     loadPosts: (category) => dispatch(loadPosts(category)),
     updateSortKey: (sortKey) => dispatch(updateSortKey(sortKey)),
-    votePost: (post_id, option) => dispatch(votePost(post_id, option))
+    votePost: (postId, option) => dispatch(votePost(postId, option))
   }
 }
 

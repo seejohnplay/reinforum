@@ -7,11 +7,11 @@ class PostForm extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props
+    const { categories, handleSubmit, postToEdit } = this.props
 
     return (
       <div className="col col-md-6 offset-md-3" id="post-form">
-        <h2>{this.props.postToEdit ? 'Edit' : 'New'} Post</h2>
+        <h2>{postToEdit ? 'Edit' : 'New'} Post</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
           <label>Title</label>
@@ -29,7 +29,7 @@ class PostForm extends Component {
             <label>Category</label>
               <Field className="form-control" name="category" component="select">
                 <option disabled hidden value=""></option>
-                {this.props.categories.map(category => (
+                {categories.map(category => (
                   <option key={category.name} value={category.path}>{category.name}</option>
                 ))}
               </Field>

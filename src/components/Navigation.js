@@ -1,36 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { loadCategories } from '../actions'
+import { loadCategories, toggleIsOpen } from '../actions'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
 
 class Navigation extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.toggle = this.toggle.bind(this)
-    this.state = {
-      isOpen: false
-    }
-  }
-
   componentDidMount() {
     this.props.loadCategories()
   }
 
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
-
   render() {
+    const { isOpen, toggleIsOpen } = this.props
+
     return (
       <div>
         <Navbar color="faded" light toggleable>
-          <NavbarToggler right onClick={this.toggle} />
+          <NavbarToggler right onClick={toggleIsOpen} />
           <NavbarBrand href="/">Reinforum</NavbarBrand>
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               {this.props.categories.map(category => (
                 <NavItem key={category.name}>
@@ -47,15 +34,17 @@ class Navigation extends React.Component {
   }
 }
 
-function mapStateToProps ({ categories, posts }) {
+function mapStateToProps ({ categories, navigation }) {
   return {
-    categories: categories
+    categories,
+    isOpen: navigation
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    loadCategories: () => dispatch(loadCategories())
+    loadCategories: () => dispatch(loadCategories()),
+    toggleIsOpen: () => dispatch(toggleIsOpen())
   }
 }
 

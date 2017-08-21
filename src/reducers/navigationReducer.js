@@ -1,10 +1,10 @@
 import * as types from '../actions/actionTypes'
 import initialState from './initialState'
 
-export default function sortKeyReducer(state = initialState.sortKey, action) {
+export default function navigationReducer(state = initialState.navIsOpen, action) {
   switch(action.type) {
-    case types.UPDATE_SORT_KEY_SUCCESS:
-      return state = !state
+    case types.TOGGLE_IS_OPEN_SUCCESS:
+      return !state
     default:
       return state
   }
