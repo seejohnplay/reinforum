@@ -31,10 +31,10 @@ class CommentEditor extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ comments, posts }) {
   return {
-    comments: state.comments,
-    posts: state.posts
+    comments,
+    posts
   }
 }
 

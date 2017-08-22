@@ -18,15 +18,15 @@ class CommentList extends React.Component {
 
     return (
       <div>
-      <Sort sortKey={sortKey} updateSortKey={updateSortKey} />
-      {this.sortBy(comments, sortKey).map(comment => (
-        <Comment
-          key={comment.id}
-          comment={comment}
-          deleteComment={deleteComment}
-          vote={voteComment} />
-      ))}
-        <div>
+        <Sort sortKey={sortKey} updateSortKey={updateSortKey} />
+        {this.sortBy(comments, sortKey).map(comment => (
+          <Comment
+            key={comment.id}
+            comment={comment}
+            deleteComment={deleteComment}
+            vote={voteComment} />
+        ))}
+        <div style={{marginTop: "5px"}}>
           <Button tag={Link} to={"/posts/"+parentId+"/comments/new"}>New Comment</Button>
         </div>
       </div>
@@ -36,7 +36,7 @@ class CommentList extends React.Component {
 
 function mapStateToProps ({ sortKey }) {
   return {
-    sortKey: sortKey
+    sortKey
   }
 }
 

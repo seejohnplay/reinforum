@@ -1,35 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import TimeAgo from 'react-timeago'
-import { Button, Card, CardText } from 'reactstrap'
-import ArrowUpIcon from 'react-icons/lib/fa/arrow-up'
-import ArrowDownIcon from 'react-icons/lib/fa/arrow-down'
+import Vote from './Vote'
+import FaPencil from 'react-icons/lib/fa/pencil'
+import FaTrash from 'react-icons/lib/fa/trash'
 
-class Comment extends React.Component {
-  render() {
-    const { comment } = this.props
+function Comment(props) {
+  const { comment, deleteComment, vote } = props
 
-    return (
-      <Card key={comment.id}>
-        <CardText>
-          <button onClick={() => this.props.vote(comment.id, "upVote")}
-            style={{backgroundColor: "transparent", border: "none"}}>
-              <ArrowUpIcon />
-          </button>
-            {comment.voteScore}
-          <button onClick={() => this.props.vote(comment.id, "downVote")}
-            style={{backgroundColor: "transparent", border: "none"}}>
-              <ArrowDownIcon />
-          </button>
-          <span className="float-right">
-            <Button tag={Link} to={"/posts/"+comment.parentId+"/comments/"+comment.id+"/edit"}>Edit</Button>
-            <Button style={{cursor: "pointer"}} color="danger" onClick={() => this.props.deleteComment(comment.parentId, comment.id)}>Delete</Button>
-          </span>
-          {comment.body} - {comment.author} (<TimeAgo date={comment.timestamp} live={false} />)
-        </CardText>
-      </Card>
-    )
-  }
+  return (
+    <div>
+      <p style={{marginBottom: "0"}}>{comment.body}</p>
+      <p className="text-muted">Commented <TimeAgo date={comment.timestamp} live={false} /> by {comment.author}</p>
+      <h6>
+        <Vote on={comment} vote={vote} />
+        <Link style={{margin: "0 5px", color: "black"}} to={"/posts/"+comment.parentId+"/comments/"+comment.id+"/edit"}><FaPencil /></Link>
+        <span style={{cursor: "pointer"}} onClick={() => deleteComment(comment.parentId, comment.id)}><FaTrash color="lightRed" /></span>
+      </h6>
+      <hr />
+    </div>
+  )
 }
 
 export default Comment

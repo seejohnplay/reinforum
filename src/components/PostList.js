@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addPost, deletePost, loadPosts, updateSortKey, votePost } from '../actions'
-import { CardColumns } from 'reactstrap'
 import Post from './Post'
 import Sort from './Sort'
 
@@ -26,16 +25,14 @@ class PostList extends React.Component {
     return (
       <div>
         <Sort sortKey={sortKey} updateSortKey={updateSortKey} />
-        <CardColumns>
-          {this.sortBy(posts, sortKey).map(post => (
-            <Post
-              key={post.id}
-              post={post}
-              deletePost={deletePost}
-              vote={votePost}
-            />
-          ))}
-        </CardColumns>
+        {this.sortBy(posts, sortKey).map(post => (
+          <Post
+            key={post.id}
+            post={post}
+            deletePost={deletePost}
+            vote={votePost}
+          />
+        ))}
       </div>
     )
   }
@@ -43,8 +40,8 @@ class PostList extends React.Component {
 
 function mapStateToProps ({ posts, sortKey }) {
   return {
-    posts: posts,
-    sortKey: sortKey
+    posts,
+    sortKey
   }
 }
 

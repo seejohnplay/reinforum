@@ -12,14 +12,16 @@ export default class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <Switch>
-          <Route path="/posts/new" component={PostEditor} />
-          <Route path="/posts/:postId/edit" component={PostEditor} />
-          <Route path="/posts/:postId/comments/new" component={CommentEditor} />
-          <Route path="/posts/:postId/comments/:commentId/edit" component={CommentEditor} />
-          <Route path="/:category/:postId" component={PostDetails} />
-          <Route path="/:category?" component={PostList} />
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route path="/posts/new" component={PostEditor} />
+            <Route path="/posts/:postId/edit" component={PostEditor} />
+            <Route path="/posts/:postId/comments/new" component={CommentEditor} />
+            <Route path="/posts/:postId/comments/:commentId/edit" component={CommentEditor} />
+            <Route path="/:category/:postId" component={PostDetails} />
+            <Route path="/:category?" component={PostList} />
+          </Switch>
+        </div>
       </div>
     )
   }

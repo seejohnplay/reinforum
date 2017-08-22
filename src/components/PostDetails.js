@@ -10,7 +10,7 @@ class PostDetails extends React.Component {
 
     return (
       <div>
-        {this.props.post ? (
+        {post ? (
           <Post
             key={post.id}
             post={post}

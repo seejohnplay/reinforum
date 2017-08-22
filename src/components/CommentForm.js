@@ -7,19 +7,19 @@ class CommentForm extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props
+    const { commentToEdit, handleSubmit } = this.props
 
     return (
       <div className="col col-md-6 offset-md-3" id="comment-form">
-        <h2>{this.props.commentToEdit ? 'Edit' : 'New'} Comment</h2>
+        <h2>{commentToEdit ? 'Edit' : 'New'} Comment</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Author</label>
-            <Field className="form-control" name="author" component="input" type="text" />
-          </div>
           <div className="form-group">
             <label>Body</label>
             <Field className="form-control" name="body" component="textarea"/>
+          </div>
+          <div className="form-group">
+            <label>Author</label>
+            <Field className="form-control" name="author" component="input" type="text" />
           </div>
           <input className="btn btn-secondary" type="submit" value="Submit" />
         </form>

@@ -32,10 +32,10 @@ class PostEditor extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ categories, posts }) {
   return {
-    categories: state.categories,
-    posts: state.posts
+    categories,
+    posts
   }
 }
 

@@ -4,7 +4,7 @@ import initialState from './initialState'
 export default function sortKeyReducer(state = initialState.sortKey, action) {
   switch(action.type) {
     case types.UPDATE_SORT_KEY_SUCCESS:
-      return state = !state
+      return action.sortKey
     default:
       return state
   }
