@@ -40,14 +40,14 @@ class Navigation extends React.Component {
 function mapStateToProps ({ categories, navigation }) {
   return {
     categories,
-    isOpen: navigation,
+    isOpen: navigation
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     loadCategories: () => dispatch(loadCategories()),
-    toggleIsOpen: () => dispatch(toggleIsOpen()),
+    toggleIsOpen: () => dispatch(toggleIsOpen())
   }
 }
 

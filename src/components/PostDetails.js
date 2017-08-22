@@ -4,26 +4,24 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { deletePost, votePost } from '../actions'
 
-class PostDetails extends React.Component {
-  render() {
-    const { deletePost, post, votePost } = this.props
+function PostDetails(props) {
+  const { deletePost, post, votePost } = props
 
-    return (
-      <div>
-        {post ? (
-          <Post
-            key={post.id}
-            post={post}
-            deletePost={deletePost}
-            vote={votePost}
-            showComments={true}
-          />
-        ) : (
-          <Redirect to="/" />
-        )}
-      </div>
-    )
-  }
+  return (
+    <div>
+      {post ? (
+        <Post
+          key={post.id}
+          post={post}
+          deletePost={deletePost}
+          vote={votePost}
+          showComments={true}
+        />
+      ) : (
+        <Redirect to="/" />
+      )}
+    </div>
+  )
 }
 
 function mapStateToProps ({ posts }, ownProps) {

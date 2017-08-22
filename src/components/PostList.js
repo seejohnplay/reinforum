@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { addPost, deletePost, loadPosts, updateSortKey, votePost } from '../actions'
 import Post from './Post'
 import Sort from './Sort'
+import { sortBy } from '../utils/helpers'
 
 class PostList extends React.Component {
   componentDidMount() {
@@ -15,17 +16,13 @@ class PostList extends React.Component {
     }
   }
 
-  sortBy(posts, prop) {
-    return posts.sort((a,b) => b[prop] - a[prop])
-  }
-
   render() {
     const { deletePost, posts, sortKey, updateSortKey, votePost } = this.props
 
     return (
       <div>
         <Sort sortKey={sortKey} updateSortKey={updateSortKey} />
-        {this.sortBy(posts, sortKey).map(post => (
+        {sortBy(posts, sortKey).map(post => (
           <Post
             key={post.id}
             post={post}
