@@ -27,10 +27,10 @@ class PostForm extends Component {
           </div>
           <div className="form-group">
             <label>Category</label>
-              <Field className="form-control" name="category" component="select">
+              <Field className="form-control" name="category_id" component="select">
                 <option disabled hidden value=""></option>
                 {categories.map(category => (
-                  <option key={category.name} value={category.path}>{category.name}</option>
+                  <option key={category.name} value={category.id}>{category.name}</option>
                 ))}
               </Field>
           </div>

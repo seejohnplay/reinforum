@@ -6,8 +6,8 @@ export default function commentReducer(state = initialState.comments, action) {
 
   switch(action.type) {
     case types.ADD_COMMENT_SUCCESS:
-      nextState[action.comment.parentId] = [
-        ...state[action.comment.parentId],
+      nextState[action.comment.post_id] = [
+        ...state[action.comment.post_id],
         action.comment
       ]
       return nextState
@@ -17,8 +17,8 @@ export default function commentReducer(state = initialState.comments, action) {
       ]
       return nextState
     case types.EDIT_COMMENT_SUCCESS:
-      nextState[action.comment.parentId] = [
-        ...state[action.comment.parentId].filter(comment => comment.id !== action.comment.id),
+      nextState[action.comment.post_id] = [
+        ...state[action.comment.post_id].filter(comment => comment.id !== action.comment.id),
         action.comment
       ]
       return nextState
@@ -26,8 +26,8 @@ export default function commentReducer(state = initialState.comments, action) {
       nextState[action.postId] = action.comments
       return nextState
     case types.VOTE_COMMENT_SUCCESS:
-      nextState[action.comment.parentId] = [
-        ...state[action.comment.parentId].map(comment => comment.id === action.comment.id ? action.comment : comment)
+      nextState[action.comment.post_id] = [
+        ...state[action.comment.post_id].map(comment => comment.id === action.comment.id ? action.comment : comment)
       ]
       return nextState
     default:

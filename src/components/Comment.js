@@ -14,8 +14,8 @@ function Comment(props) {
       <p className="text-muted">Commented <TimeAgo date={comment.timestamp} live={false} /> by {comment.author}</p>
       <h6>
         <Vote on={comment} vote={vote} />
-        <Link style={{margin: "0 5px", color: "black"}} to={"/posts/"+comment.parentId+"/comments/"+comment.id+"/edit"}><FaPencil /></Link>
-        <span style={{cursor: "pointer"}} onClick={() => deleteComment(comment.parentId, comment.id)}><FaTrash color="lightRed" /></span>
+        <Link style={{margin: "0 5px", color: "black"}} to={"/posts/"+comment.post_id+"/comments/"+comment.id+"/edit"}><FaPencil /></Link>
+        <span style={{cursor: "pointer"}} onClick={() => deleteComment(comment.post_id, comment.id)}><FaTrash color="lightRed" /></span>
       </h6>
       <hr />
     </div>

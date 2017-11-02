@@ -3,5 +3,5 @@ export default {
   comments: {},
   navIsOpen: false,
   posts: [],
-  sortKey: 'voteScore'
+  sortKey: 'vote_score'
 }

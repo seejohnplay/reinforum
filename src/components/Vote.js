@@ -8,12 +8,12 @@ function Vote(props) {
 
   return (
     <span>
-      {on.voteScore} <StarIcon color="gold" />
-      <button onClick={() => vote(on.id, "upVote")}
+      {on.vote_score} <StarIcon color="gold" />
+      <button onClick={() => vote(on.id, "upvote")}
         style={{backgroundColor: "transparent", border: "none", cursor: "pointer"}}>
           <ThumbsUpIcon color="lightGreen" />
       </button>
-      <button onClick={() => vote(on.id, "downVote")}
+      <button onClick={() => vote(on.id, "downvote")}
         style={{backgroundColor: "transparent", border: "none", cursor: "pointer"}}>
           <ThumbsDownIcon color="red" />
       </button>

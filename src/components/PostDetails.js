@@ -26,7 +26,7 @@ function PostDetails(props) {
 
 function mapStateToProps ({ posts }, ownProps) {
   return {
-    post: posts.find(post => post.id === ownProps.match.params.postId)
+    post: posts.find(post => post.id === parseInt(ownProps.match.params.postId, 10))
   }
 }
 

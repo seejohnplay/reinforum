@@ -1,20 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import uuid from 'uuid'
 import CommentForm from './CommentForm'
 import { addComment, editComment } from '../actions'
 
 class CommentEditor extends React.Component {
   componentWillMount() {
-    this.parentPost = this.props.posts.find(post => post.id === this.props.match.params.postId)
-    this.commentToEdit = this.props.comments[this.parentPost.id].find(comment => comment.id === this.props.match.params.commentId)
+    this.parentPost = this.props.posts.find(post => post.id === parseInt(this.props.match.params.postId, 10))
+    this.commentToEdit = this.props.comments[this.parentPost.id].find(comment => comment.id === parseInt(this.props.match.params.commentId, 10))
   }
 
   submit = (comment) => {
-    comment.id = comment.id || uuid.v4()
-    comment.parentId = this.parentPost.id
-    comment.timestamp = Date.now()
+    comment.post_id = this.parentPost.id
 
     this.commentToEdit ? this.props.editComment(comment) : this.props.addComment(comment)
     this.props.history.goBack()

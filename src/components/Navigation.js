@@ -15,8 +15,8 @@ class Navigation extends React.Component {
     return (
       <div>
         <Navbar color="faded" light toggleable>
-            <NavbarToggler right onClick={toggleIsOpen} />
             <NavbarBrand className="logo" href="/">Reinforum</NavbarBrand>
+            <NavbarToggler right onClick={toggleIsOpen} />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem key="all">
@@ -24,7 +24,7 @@ class Navigation extends React.Component {
                 </NavItem>
                 {categories.map(category => (
                   <NavItem key={category.name}>
-                    <NavLink className={category.name} tag={Link} to={"/" + category.name}>{category.name}</NavLink>
+                    <NavLink className={category.url} tag={Link} to={"/" + category.url}>{category.name}</NavLink>
                   </NavItem>))}
                 <NavItem key="add">
                   <NavLink className="new-post" tag={Link} to="/posts/new">New Post</NavLink>

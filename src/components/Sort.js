@@ -9,15 +9,15 @@ function Sort(props) {
         <span style={{marginRight: "10px"}}>Sort by</span>
         <ButtonGroup>
           <Button
-            className={sortKey === "voteScore" ? "active" : ""}
+            className={sortKey === "vote_score" ? "active" : ""}
             style={{cursor: "pointer"}}
-            onClick={() => updateSortKey("voteScore")}>
+            onClick={() => updateSortKey("vote_score")}>
               Popularity
           </Button>
           <Button
-            className={sortKey === "timestamp" ? "active" : ""}
+            className={sortKey === "created_at" ? "active" : ""}
             style={{cursor: "pointer"}}
-            onClick={() => updateSortKey("timestamp")}>
+            onClick={() => updateSortKey("created_at")}>
               Timestamp
           </Button>
         </ButtonGroup>

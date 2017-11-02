@@ -12,7 +12,7 @@ export function loadCategories() {
 }
 
 export function loadCategoriesSuccess(payload) {
-  return {type: types.LOAD_CATEGORIES_SUCCESS, categories: payload.categories}
+  return {type: types.LOAD_CATEGORIES_SUCCESS, categories: payload}
 }
 
 // Posts

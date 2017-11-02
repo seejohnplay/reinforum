@@ -1,41 +1,35 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import uuid from 'uuid'
 import PostForm from './PostForm'
 import { addPost, editPost } from '../actions'
 
 class PostEditor extends React.Component {
-  componentWillMount() {
-    this.postToEdit = this.props.posts.find(post => post.id === this.props.match.params.postId)
-  }
 
   submit = (post) => {
-    post.id = post.id || uuid.v4()
-    post.timestamp = Date.now()
-
-    this.postToEdit ? this.props.editPost(post) : this.props.addPost(post)
+    this.props.post ? this.props.editPost(post) : this.props.addPost(post)
     this.props.history.goBack()
   }
 
   render() {
-    const { categories } = this.props
+    const { categories, post } = this.props
 
     return (
       <div>
         <PostForm
           categories={categories}
-          postToEdit={this.postToEdit}
+          postToEdit={post}
           onSubmit={this.submit} />
       </div>
     )
   }
 }
 
-function mapStateToProps({ categories, posts }) {
+function mapStateToProps({ categories, posts }, ownProps) {
   return {
     categories,
-    posts
+    posts,
+    post: posts.find(post => post.id === parseInt(ownProps.match.params.postId, 10))
   }
 }
 

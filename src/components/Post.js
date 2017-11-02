@@ -5,7 +5,7 @@ import { loadComments } from '../actions'
 import TimeAgo from 'react-timeago'
 import CommentList from './CommentList'
 import Vote from './Vote'
-import { Badge, CardTitle } from 'reactstrap'
+import { Badge, CardText } from 'reactstrap'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaTrash from 'react-icons/lib/fa/trash'
 
@@ -15,18 +15,18 @@ class Post extends React.Component {
   }
 
   render() {
-    const { comments, post, showComments, vote } = this.props
-    const MaybeLink = !showComments ? Link : CardTitle;
+    const { category, comments, post, showComments, vote } = this.props
+    const MaybeLink = !showComments ? Link : CardText;
 
     return (
       <div>
         <h4>
-          <MaybeLink to={"/" + post.category + "/" + post.id}>{post.title}</MaybeLink>
+          <MaybeLink to={"/" + category.url + "/" + post.id}>{post.title}</MaybeLink>
         </h4>
         <p className="text-muted">
-          Posted <TimeAgo date={post.timestamp} live={false} /> by {post.author}
+          Posted <TimeAgo date={post.created_at} live={false} /> by {post.author}
           <span style={{marginLeft: "5px"}}>
-            <Badge pill className={post.category + "-card"} tag={Link} to={"/" + post.category}>{post.category}</Badge>
+            <Badge pill className={category.url + "-card"} tag={Link} to={"/" + category.url}>{category.name}</Badge>
           </span>
         </p>
 
@@ -48,8 +48,9 @@ class Post extends React.Component {
   }
 }
 
-function mapStateToProps ({ comments }) {
+function mapStateToProps ({ categories, comments }, ownProps) {
   return {
+    category: categories.find(category => category.id === ownProps.post.category_id),
     comments
   }
 }
